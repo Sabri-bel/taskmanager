@@ -23,7 +23,7 @@ class Task(db.Model):
     task_description = db.Column(db.Text, nullable=False)
     is_urgent = db.Column(db.Boolean, nullable=False)
     due_date = db.Column(db.Date, nullable=False)
-    category_id = db.Column(db.integer, db.ForeignKey("category.id"), ondelete="CASCADE", nullable=False)
+    category_id = db.Column(db.Integer, db.ForeignKey("category.id", ondelete="CASCADE"), nullable=False)
     
     def __repr__(self):
         #__Repr__ to repreent iself form of a string
