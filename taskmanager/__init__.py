@@ -7,7 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 # the below code will import env if the env file is present in the path (this is not committed)
 # this is for use the hidden environmental variables
-if os.path.exist("env.py"):
+if os.path.exists("env.py"):
     import env #noqa -> no quality assurance
 
 
