@@ -5,11 +5,11 @@ from taskmanager import db
 # we will create 2 separate tables using sqlalchemy's ORM
 # table 1 = category schema
 class Category(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    category_name =  db.Column(db.String(25), unique= True, nullable=False)
+    id = db.Column(db.Integer, primary_key=True) #applied automatically by default
+    category_name =  db.Column(db.String(25), unique= True, nullable=False) #need to be collected with the categories.html
     # the following create a relationship between the table category and the table task
     # it allow the cascade when delete the category ID (delete all the field related)
-    tasks = db.relationship("Task", backref="category", cascade="all, delete", lazy=True)
+    tasks = db.relationship("Task", backref="category", cascade="all, delete", lazy=True) #independent task
 
     def __repr__(self):
         #__Repr__ to repreent iself form of a string

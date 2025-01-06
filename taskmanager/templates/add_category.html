@@ -1,3 +1,6 @@
+<!--template n2 for adding new categories with a button-->
+
+
 {% extends "base.html" %}
 {% block content %}
 
@@ -5,12 +8,15 @@
 
 
 <div class="row card-panel grey lighten-5">
+    <!--link to the python function add_category
+    double curly bracket since it target a file within the project (present in route.py)-->
     <form class="col s12" method="POST" action="{{ url_for('add_category') }}">
       <!--category name-->
       <div class="row">
         <div class="input-field col s12">
             <i class="fas fa-folder-open prefix light-blue-text text-darken-4"></i>
           <input id="category_name" name="category_name" minlength="3" maxlength="25" type="text" class="validate" required>
+          <!--id, name and label for  must match-->
           <label for="category_name">Category Name</label>
         </div>
       </div>
