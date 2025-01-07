@@ -11,7 +11,14 @@ def home():
 # this will link the categories.html with a function with the same name
 @app.route("/categories")
 def categories():
-    return render_template("categories.html")
+    # retrieve the categorylisted in the database and display them
+    # 1 query the Category model imported at the beginning (category.query.all())
+    # 2 add to the category model the sorting method order_by() for retrieve information added later
+    # 3 sorting by category_name 
+    # add the list() python function because .all return a cursor object that cannot be rendered correctly with the fromt end templates
+    categories = list(Category.query.order_by(Category.category_name).all())
+    #categories=categories -> first one is the name of the html file and the second one is the name of the variable specified above
+    return render_template("categories.html", categories=categories)
 
 
 # this will link the add_categories.html with a function with the same name
