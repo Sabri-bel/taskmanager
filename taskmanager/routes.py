@@ -48,3 +48,17 @@ def edit_category(category_id):
         db.session.commit()
         return redirect(url_for("categories"))
     return render_template("edit_category.html", category=category) # return the basic template 
+
+
+
+#this is the fucntion for delete categories
+#it is important to add a defensive code because it will delete all data from the database
+#it is also important to add a sign in in order to avoid random people mess up with the code 
+@app.route("/delete_category/<int:category_id>")
+def delete_category(category_id):
+    category = Category.query.get_or_404(category_id)
+    db.session.delete(category)
+    db.session.commit()
+    return redirect(url_for("categories"))
+
+
