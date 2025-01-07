@@ -22,7 +22,7 @@
       <ul class="right hide-on-med-and-down">
         <!--below will link the python home() fucntion available in route.py-->
         <li><a href="{{ url_for('home') }}">Home</a></li>
-        <li><a href="">New Task</a></li>
+        <li><a href="{{ url_for('add_task') }}">New Task</a></li>
 
         <!--it will link the python categories() fucntion available in route.py-->
         <li><a href="{{ url_for('categories') }}">Categories</a></li>
@@ -32,7 +32,7 @@
   <!--mobile sidenav-->
   <ul class="sidenav" id="mobile-demo">
     <li><a href="{{ url_for('home') }}">Home</a></li>
-    <li><a href="">New Task</a></li>
+    <li><a href="{{ url_for('add_task') }}">New Task</a></li>
     <li><a href="{{ url_for('categories') }}">Categories</a></li>
   </ul>
     </header>

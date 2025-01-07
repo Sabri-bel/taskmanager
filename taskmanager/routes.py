@@ -62,3 +62,19 @@ def delete_category(category_id):
     return redirect(url_for("categories"))
 
 
+@app.route("/add_task", methods=["GET", "POST"])
+def add_task():
+    # add the list() python function because .all return a cursor object that cannot be rendered correctly with the fromt end templates
+    categories = list(Category.query.order_by(Category.category_name).all())
+    if request.method == "POST": #this is the post method 
+        task = Task(
+            task_name=request.form.get("task_name"),
+            task_description=request.form.get("task_description"),
+            is_urgent=bool(True if request.form.get("is_urgent") else False),
+            due_date=request.form.get("due_date"),
+            category_id=request.form.get("category_id")
+        )
+        db.session.add(task)
+        db.session.commit() #commit to seqlalchemy database
+        return redirect(url_for("home")) #redirect to the categories.html page
+    return render_template("add_task.html", categories=categories) #this is the get method that render the basic template
