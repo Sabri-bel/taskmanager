@@ -6,12 +6,14 @@ from taskmanager.models import Category, Task # then create taskmanager database
 #This will be used to target a function called 'home', which will just return the rendered_template
 @app.route("/")
 def home():
-    return render_template("task.html")
+    #this show the list of the task in the home page
+    tasks = list(Task.query.order_by(Task.id).all())
+    return render_template("task.html", tasks=tasks)
 
 # this will link the categories.html with a function with the same name
 @app.route("/categories")
 def categories():
-    # retrieve the categorylisted in the database and display them
+    # retrieve the categorylisted in the database and display them in the categories page
     # 1 query the Category model imported at the beginning (category.query.all())
     # 2 add to the category model the sorting method order_by() for retrieve information added later
     # 3 sorting by category_name 
