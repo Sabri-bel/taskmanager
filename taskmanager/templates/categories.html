@@ -18,6 +18,7 @@ link the add_category python function-->
     </div>
 </div>
 <div class="row">
+    <!--the part below is a kind of loop allow us to list each categories in different tiles-->
     {% for category in categories %}
     <div class="col s12 m6 l3">
         <div class="card light-blue text-darken-4 center-align">
@@ -25,7 +26,9 @@ link the add_category python function-->
                 <span class="card-title">{{ category.category_name }}</span>
             </div>
             <div class="card-action">
-                <a href="#" class="btn green accent-4">Edit</a>
+                <!--the href below contain the category id also, in order to modify a specific record
+                category_id is the name of the variable that is assigned to the category.id value-->
+                <a href="{{ url_for('edit_category', category_id=category.id) }}" class="btn green accent-4">Edit</a>
                 <a href="#" class="btn red">Delete</a>
             </div>
         </div>

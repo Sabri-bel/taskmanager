@@ -1,0 +1,37 @@
+<!--template n3 for editing new categories with a button-->
+
+
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="light-blue-text text-darken-4 center-align">Edit Category</h3>
+
+
+<div class="row card-panel grey lighten-5">
+    <!--link to the python function edit_category
+    double curly bracket since it target a file within the project (present in route.py)
+    we also need to specify the category id because we added this to the routes.py and categories file
+    any link that calls that fucntion must be corrected -->
+    <form class="col s12" method="POST" action="{{ url_for('edit_category', category_id=category.id) }}">
+      <!--category name-->
+      <div class="row">
+        <div class="input-field col s12">
+            <i class="fas fa-folder-open prefix light-blue-text text-darken-4"></i>
+            <!--"value" below is used for retrieve information in the input field -->
+          <input id="category_name" name="category_name" value="{{ category.category_name }}" minlength="3" maxlength="25" type="text" class="validate" required>
+          <!--id, name and label for  must match-->
+          <label for="category_name">Category Name</label>
+        </div>
+      </div>
+      <!--submit button-->
+      <div class="row">
+        <div class="col s12 center-align">
+          <button type="submit" class="btn-large light-blue darken-1">
+            Edit Category <i class="fas fa-edit right"></i>
+          </button>
+           
+        </div>
+      </div>
+    </form>
+</div>
+{% endblock %}

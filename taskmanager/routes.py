@@ -35,3 +35,16 @@ def add_category():
         db.session.commit() #commit to seqlalchemy database
         return redirect(url_for("categories")) #redirect to the categories.html page
     return render_template("add_category.html") #this is the get method that render the basic template
+
+
+# this function will allow the user to edit a category
+#the category id is required because we specified that in the categories.html file
+#it must be wrapped with the angle brackets and specify int for the integer result
+@app.route("/edit_category/<int:category_id>", methods=["GET", "POST"])
+def edit_category(category_id):
+    category = Category.query.get_or_404(category_id) # get_or_404 is a sqlalchemy method
+    if request.method == "POST":
+        category.category_name = request.form.get("category_name")
+        db.session.commit()
+        return redirect(url_for("categories"))
+    return render_template("edit_category.html", category=category) # return the basic template 
