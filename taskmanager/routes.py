@@ -80,3 +80,23 @@ def add_task():
         db.session.commit() #commit to seqlalchemy database
         return redirect(url_for("home")) #redirect to the categories.html page
     return render_template("add_task.html", categories=categories) #this is the get method that render the basic template
+
+
+
+@app.route("/edit_task/<int:task_id>", methods=["GET", "POST"])
+def edit_task(task_id):
+    task = Task.query.get_or_404(task_id)
+    #  the list() python function because .all return a cursor object that cannot be rendered correctly with the fromt end templates
+    categories = list(Category.query.order_by(Category.category_name).all())
+    if request.method == "POST": #this is the post method 
+        # all the fields should be updated even if the customer is changing one of them
+        # if not updated, they will be deleted by default
+        task.task_name=request.form.get("task_name"),
+        task.task_description=request.form.get("task_description"),
+        task.is_urgent=bool(True if request.form.get("is_urgent") else False),
+        task.due_date=request.form.get("due_date"),
+        task.category_id=request.form.get("category_id")
+        db.session.commit() #commit to seqlalchemy database
+    return render_template("edit_task.html", task=task, categories=categories) #this is the get method that render the basic template
+
+
