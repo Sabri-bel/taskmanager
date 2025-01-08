@@ -100,3 +100,12 @@ def edit_task(task_id):
     return render_template("edit_task.html", task=task, categories=categories) #this is the get method that render the basic template
 
 
+#this is the fucntion for delete tasks
+#it is important to add a defensive code because it will delete all data from the database
+#it is also important to add a sign in in order to avoid random people mess up with the code 
+@app.route("/delete_task/<int:task_id>")
+def delete_task(task_id):
+    task = Task.query.get_or_404(task_id)
+    db.session.delete(task)
+    db.session.commit()
+    return redirect(url_for("home"))
